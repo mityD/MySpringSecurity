@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login or Register</title>
+</head>
+<body>
+<div align="center">
+    <h1>Welcome</h1>
+
+    <h2>Login</h2>
+    <form method="post" action="/login">
+        <input type="text" name="username" placeholder="Username" required/><br/>
+        <input type="password" name="password" placeholder="Password" required/><br/>
+        <button type="submit">Login</button>
+        <td>
+            <a th:href="@{/register}">Register</a>
+        </td>
+    </form>
+</div>
+</body>
+</html>
