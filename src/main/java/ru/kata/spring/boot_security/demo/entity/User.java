@@ -27,7 +27,7 @@ public class User implements UserDetails {
     @Column(name = "PASSWORD")
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
@@ -121,11 +121,4 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-
-    public boolean isAdmin() {
-        return roles.stream()
-                .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
-    }
-
 }

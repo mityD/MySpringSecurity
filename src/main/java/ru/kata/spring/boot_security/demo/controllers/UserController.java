@@ -50,44 +50,4 @@ public class UserController {
         model.addAttribute("user", user);
         return "user";
     }
-
-    @GetMapping("/admin")
-    public String adminPage(Model model) {
-        List<User> users = userService.findAll();
-        model.addAttribute("users", users);
-        return "admin";
-    }
-
-    @GetMapping("/new")
-    public String newUserForm(ModelMap model) {
-        model.addAttribute("user", new User());
-        model.addAttribute("allRoles", userService.findAllRoles());
-        return "save";
-    }
-
-    @PostMapping("/save")
-    public String saveUser(@ModelAttribute("user") User user) {
-        userService.save(user);
-        return "redirect:/admin";
-    }
-
-    @GetMapping("/delete")
-    public String deleteUser(@RequestParam("id") Long id) {
-        userService.deleteById(id);
-        return "redirect:/admin";
-    }
-
-    @GetMapping("/edit")
-    public String editFormUser(@RequestParam("id") Long id, ModelMap model) {
-        User user = userService.findById(id);
-        model.addAttribute("allRoles", userService.findAllRoles());
-        model.addAttribute("user", user);
-        return "edit";
-    }
-
-    @PostMapping("/edit")
-    public String editUser(@ModelAttribute("user") User user) {
-        userService.update(user);
-        return "redirect:/admin";
-    }
 }

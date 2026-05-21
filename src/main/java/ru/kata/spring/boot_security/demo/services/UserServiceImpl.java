@@ -25,13 +25,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Role> findAllRoles() {
         return roleRepository.findAll();
-    }
-
-    @Override
-    public Role findRoleById(Long id) {
-        return roleRepository.getById(id);
     }
 
     @Override
@@ -48,11 +44,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public User findByUserName(String username) {
-        return userRepository.findByUsername(username).orElse(null);
-    }
-
-    @Override
     public Role findByRolename(String rolename) {
         return roleRepository.findByRolename(rolename).orElse(null);
     }
@@ -77,17 +68,6 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void deleteById(Long id) {
         userRepository.deleteById(id);
-    }
-
-    @Override
-    @Transactional
-    public void addRoleToUser(Long userId, Long roleId) {
-        User user = findById(userId);
-        Role role = roleRepository.findById(roleId).orElse(null);
-        if (user != null && role != null) {
-            user.getRoles().add(role);
-            userRepository.save(user);
-        }
     }
 }
 
